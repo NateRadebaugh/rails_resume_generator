@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  role: MyString
+  company: MyString
+  location: MyString
+  dates: MyString
+  details: MyText
+
+two:
+  role: MyString
+  company: MyString
+  location: MyString
+  dates: MyString
+  details: MyText

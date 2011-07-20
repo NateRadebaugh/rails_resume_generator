@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  variable_name: MyString
+  variable_value: MyString
+
+two:
+  variable_name: MyString
+  variable_value: MyString

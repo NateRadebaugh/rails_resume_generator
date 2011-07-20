@@ -1,0 +1,25 @@
+<h1>Listing misc_variables</h1>
+
+<table>
+  <tr>
+    <th>Variable name</th>
+    <th>Variable value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @misc_variables.each do |misc_variable| %>
+  <tr>
+    <td><%= misc_variable.variable_name %></td>
+    <td><%= misc_variable.variable_value %></td>
+    <td><%= link_to 'Show', misc_variable %></td>
+    <td><%= link_to 'Edit', edit_misc_variable_path(misc_variable) %></td>
+    <td><%= link_to 'Destroy', misc_variable, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Misc variable', new_misc_variable_path %>

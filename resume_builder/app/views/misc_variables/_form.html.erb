@@ -1,0 +1,25 @@
+<%= form_for(@misc_variable) do |f| %>
+  <% if @misc_variable.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@misc_variable.errors.count, "error") %> prohibited this misc_variable from being saved:</h2>
+
+      <ul>
+      <% @misc_variable.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :variable_name %><br />
+    <%= f.text_field :variable_name %>
+  </div>
+  <div class="field">
+    <%= f.label :variable_value %><br />
+    <%= f.text_field :variable_value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

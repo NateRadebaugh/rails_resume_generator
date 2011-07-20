@@ -1,0 +1,23 @@
+<h1>Listing computer_skills</h1>
+
+<table>
+  <tr>
+    <th>Skill</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @computer_skills.each do |computer_skill| %>
+  <tr>
+    <td><%= computer_skill.skill %></td>
+    <td><%= link_to 'Show', computer_skill %></td>
+    <td><%= link_to 'Edit', edit_computer_skill_path(computer_skill) %></td>
+    <td><%= link_to 'Destroy', computer_skill, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Computer skill', new_computer_skill_path %>

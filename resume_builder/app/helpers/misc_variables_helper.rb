@@ -1,0 +1,2 @@
+module MiscVariablesHelper
+end

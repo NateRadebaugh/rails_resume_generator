@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  club_name: MyString
+  position: MyString
+  dates: MyString
+
+two:
+  club_name: MyString
+  position: MyString
+  dates: MyString

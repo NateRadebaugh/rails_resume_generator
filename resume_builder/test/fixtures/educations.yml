@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  degree_type: MyString
+  degree_subject: MyString
+  school: MyString
+  school_location: MyString
+  graduation_date: MyString
+
+two:
+  degree_type: MyString
+  degree_subject: MyString
+  school: MyString
+  school_location: MyString
+  graduation_date: MyString

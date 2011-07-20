@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Variable name:</b>
+  <%= @misc_variable.variable_name %>
+</p>
+
+<p>
+  <b>Variable value:</b>
+  <%= @misc_variable.variable_value %>
+</p>
+
+
+<%= link_to 'Edit', edit_misc_variable_path(@misc_variable) %> |
+<%= link_to 'Back', misc_variables_path %>

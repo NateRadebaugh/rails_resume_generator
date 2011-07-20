@@ -1,4 +1,16 @@
 ResumeBuilder::Application.routes.draw do
+  resources :misc_variables
+
+  resources :activities
+
+  resources :related_courses
+
+  resources :educations
+
+  resources :computer_skills
+
+  resources :experiences
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
