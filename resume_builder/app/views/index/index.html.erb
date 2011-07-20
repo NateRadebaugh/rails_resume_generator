@@ -1,0 +1,106 @@
+
+<table>
+  <tr>
+    <th>Variable name</th>
+    <th>Variable value</th>
+    
+  </tr>
+
+<% @misc_variables.each do |misc_variable| %>
+  <tr>
+    <td><%= misc_variable.variable_name %></td>
+    <td><%= misc_variable.variable_value %></td>
+</tr>
+<% end %>
+</table>
+
+
+
+<table>
+  <tr>
+    <th>Skill</th>
+    
+  </tr>
+
+<% @computer_skills.each do |computer_skill| %>
+  <tr>
+    <td><%= computer_skill.skill %></td>
+</tr>
+<% end %>
+</table>
+
+<table>
+  <tr>
+    <th>Role</th>
+    <th>Company</th>
+    <th>Location</th>
+    <th>Dates</th>
+    <th>Details</th>
+    
+  </tr>
+
+<% @experiences.each do |experience| %>
+  <tr>
+    <td><%= experience.role %></td>
+    <td><%= experience.company %></td>
+    <td><%= experience.location %></td>
+    <td><%= experience.dates %></td>
+    <td><%= experience.details %></td>
+</tr>
+<% end %>
+</table>
+
+<table>
+  <tr>
+    <th>Degree type</th>
+    <th>Degree subject</th>
+    <th>School</th>
+    <th>School location</th>
+    <th>Graduation date</th>
+    
+  </tr>
+
+<% @educations.each do |education| %>
+  <tr>
+    <td><%= education.degree_type %></td>
+    <td><%= education.degree_subject %></td>
+    <td><%= education.school %></td>
+    <td><%= education.school_location %></td>
+    <td><%= education.graduation_date %></td>
+</tr>
+<% end %>
+</table>
+
+
+
+<table>
+  <tr>
+    <th>Course</th>
+    
+  </tr>
+
+<% @related_courses.each do |related_course| %>
+  <tr>
+    <td><%= related_course.course %></td>
+</tr>
+<% end %>
+</table>
+
+
+
+<table>
+  <tr>
+    <th>Club name</th>
+    <th>Position</th>
+    <th>Dates</th>
+    
+  </tr>
+
+<% @activities.each do |activity| %>
+  <tr>
+    <td><%= activity.club_name %></td>
+    <td><%= activity.position %></td>
+    <td><%= activity.dates %></td>
+</tr>
+<% end %>
+</table>
