@@ -1,106 +1,103 @@
-
-<table>
-  <tr>
-    <th>Variable name</th>
-    <th>Variable value</th>
-    
-  </tr>
-
-<% @misc_variables.each do |misc_variable| %>
-  <tr>
-    <td><%= misc_variable.variable_name %></td>
-    <td><%= misc_variable.variable_value %></td>
-</tr>
-<% end %>
-</table>
-
-
-
-<table>
-  <tr>
-    <th>Skill</th>
-    
-  </tr>
-
-<% @computer_skills.each do |computer_skill| %>
-  <tr>
-    <td><%= computer_skill.skill %></td>
-</tr>
-<% end %>
-</table>
-
-<table>
-  <tr>
-    <th>Role</th>
-    <th>Company</th>
-    <th>Location</th>
-    <th>Dates</th>
-    <th>Details</th>
-    
-  </tr>
-
-<% @experiences.each do |experience| %>
-  <tr>
-    <td><%= experience.role %></td>
-    <td><%= experience.company %></td>
-    <td><%= experience.location %></td>
-    <td><%= experience.dates %></td>
-    <td><%= experience.details %></td>
-</tr>
-<% end %>
-</table>
-
-<table>
-  <tr>
-    <th>Degree type</th>
-    <th>Degree subject</th>
-    <th>School</th>
-    <th>School location</th>
-    <th>Graduation date</th>
-    
-  </tr>
-
-<% @educations.each do |education| %>
-  <tr>
-    <td><%= education.degree_type %></td>
-    <td><%= education.degree_subject %></td>
-    <td><%= education.school %></td>
-    <td><%= education.school_location %></td>
-    <td><%= education.graduation_date %></td>
-</tr>
-<% end %>
-</table>
-
-
-
-<table>
-  <tr>
-    <th>Course</th>
-    
-  </tr>
-
-<% @related_courses.each do |related_course| %>
-  <tr>
-    <td><%= related_course.course %></td>
-</tr>
-<% end %>
-</table>
-
-
-
-<table>
-  <tr>
-    <th>Club name</th>
-    <th>Position</th>
-    <th>Dates</th>
-    
-  </tr>
-
-<% @activities.each do |activity| %>
-  <tr>
-    <td><%= activity.club_name %></td>
-    <td><%= activity.position %></td>
-    <td><%= activity.dates %></td>
-</tr>
-<% end %>
-</table>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html style="font-family:Arial"><head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Resume for <%= @name %></title>
+<style type="text/css">
+	table, html {
+		font-size : 90%;
+	}
+	table {
+		width : 100%;
+	}
+	table td {
+		vertical-align : top;
+	}
+	td {
+		padding : 5 0 0 0;
+		width : 300px;
+	}
+	.first {
+		width : 400px !important;
+	}
+	p, ul, ul li {
+		margin : 0;
+		padding : 0;
+	}
+	ul {
+		margin-left : 30px;
+	}
+	hr {
+		margin : 5px 0 5px 0;
+		border:1px solid #999;
+	}
+</style>
+</head>
+<body>
+	<table><tbody>
+	<tr><td style="text-align:left;vertical-align:middle"><strong><font size="+2"><%= @name %></font></strong></td><td style="text-align:right">
+	<strong>                                               
+	<% @address.split('|').each do |addressLine| %>
+		<%= addressLine.upcase %><br />
+	<% end %>
+	<%= @phone %><br />      
+	<%= @email %><br /></strong></td></tr></tbody></table>
+	<hr>
+	<p><strong>OBJECTIVE</strong></p>
+	<p><%= highlight(@objective,@important) %></p>
+	<center><strong>COMPUTER SKILLS</strong><br></center>
+	<ul style="list-style:none">
+	<% @computer_skills.each do |computer_skill| %>
+		<li><%= computer_skill.skill %>.</li>
+	<% end %>
+	</ul>
+	<hr>
+	<center><strong>EXPERIENCE</strong><br></center>
+	<table><tbody>  
+	<% @experiences.each do |experience| %>
+	  <tr>
+	    <td class="first"><strong><%= experience.role %></strong>
+			<% if experience.details %>                            
+				<ul>
+				<% experience.details.split("\n").each do |detail| %>
+					<li><%= detail %></li>
+				<% end %>
+				</ul>
+			<% end %>
+		</td>
+	    <td><%= experience.company %></td>
+	    <td><%= experience.location %></td>
+	    <td style="text-align:right"><%= experience.dates %></td>
+	</tr>
+	<% end %>
+	</tbody></table>
+	<hr>
+	<center><strong>EDUCATION</strong></center>
+	<table><tbody>
+	<% @educations.each do |education| %>   
+		<tr>
+	    <td style="width:90%"><strong><%= education.degree_type %> in <big><%= education.degree_subject %></big>,</strong> <%= education.school %>, <%= education.school_location %></td>
+	    <td style="text-align:right"><%= education.graduation_date %></td>
+	<% end %>
+	<tr><td>	
+	<strong>Cumulative GPA: <big><%= @cumulativeGpa %> / <%= @maximumGpa %></big></strong>
+	</td></tr>
+	</tbody></table>
+	<hr>
+	<center><strong>RELATED COURSES</strong></center>
+	<ul style="list-style:none">
+		<% @related_courses.each do |related_course| %>
+			<li><%= related_course.course+((related_course==@related_courses.last)? '.' : ',') %></li>
+		<% end %>
+	</ul>
+	<hr>
+	<center><strong>ACTIVITIES</strong></center>
+	<table><tbody>      
+	<% @activities.each do |activity| %>
+	  <tr>
+	    <td><strong><%= activity.club_name %></strong></td>
+	    <td><%= activity.position %></td>
+	    <td style="text-align:right"><%= activity.dates %></td>
+	</tr>
+	<% end %>
+	</tbody></table>
+</body>
+</html>
