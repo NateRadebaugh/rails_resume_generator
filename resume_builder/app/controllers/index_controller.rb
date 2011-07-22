@@ -71,6 +71,8 @@ class IndexController < ApplicationController
         
         # if wkhtmltopdf is installed, save the output to a pdf
         system('wkhtmltopdf ../resume.html ../Resume_for_'+@name.gsub(' ','_')+'.pdf &')
+        
+        system('sqlite3 db/development.sqlite3 .dump > ../backup_of_db.sql &')
       end
     else
       @error = 'DB is not set up right. Resume will not display correctly.'
