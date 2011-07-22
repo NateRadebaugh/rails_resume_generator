@@ -5,7 +5,10 @@ class IndexController < ApplicationController
     @activities = Activity.all
     @computer_skills = ComputerSkill.all
     MiscVariable.all.each {
-      |var|
+      |var|                      
+        if var.variable_value.nil?
+          var.variable_value='' 
+        end
         case var.variable_name       
          when 'name'
            @name = var.variable_value
@@ -20,14 +23,57 @@ class IndexController < ApplicationController
          when 'important_words_in_objective'
            @important = var.variable_value
          when 'maximumGpa'
-            @maximumGpa = format("%.2f",var.variable_value.to_f)
+           @maximumGpa = var.variable_value
          when 'cumulativeGpa'
-            @cumulativeGpa = format("%.2f",var.variable_value.to_f)
+           @cumulativeGpa = var.variable_value
          end
     }
+    if @name.nil? || @address.nil? || @phone.nil? || @email.nil? || @objective.nil? || @important.nil? || @cumulativeGpa.nil? || @educations.empty? || @experiences.empty? || @activities.empty? || @computer_skills.empty?
+      @empty_db = true
+    end
+    if @name.nil?
+      @name = 'John Doe'
+    end
+    if @address.nil?
+      @address = '555 No Street|No City 55555'
+    end
+    if @phone.nil?
+      @phone = '555-555-5555'
+    end
+    if @email.nil?
+      @email = 'nobody@example.com'
+    end
+    if @objective.nil?
+      @objective = 'To insert values into the db.'
+    end
+    if @important.nil?
+      @important = 'insert values'
+    end
+    if @maximumGpa.nil?
+      @maximumGpa = 4;
+    end
+    if @cumulativeGpa.nil?
+      @cumulativeGpa = 4;
+    end
     @related_courses = RelatedCourse.all
     @page_data = render_to_string()                    
     
-    File.open('../resume.html','w') {|f| f.write(@page_data) }
+    unless @empty_db
+      if (File.exist?('../resume.html'))
+        file = File.open('../resume.html','rb')
+        contents = file.read
+      else
+        contents = ''
+      end
+      if (@page_data!=contents)
+        # save the output to an html version of the resume
+        File.open('../resume.html','w') {|f| f.write(@page_data) }
+        
+        # if wkhtmltopdf is installed, save the output to a pdf
+        system('wkhtmltopdf ../resume.html ../Resume_for_'+@name.gsub(' ','_')+'.pdf &')
+      end
+    else
+      @error = 'DB is not set up right. Resume will not display correctly.'
+    end
   end
 end

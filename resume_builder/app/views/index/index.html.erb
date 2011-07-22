@@ -16,6 +16,13 @@
 		padding : 5 0 0 0;
 		width : 300px;
 	}
+	td:first-child {
+		text-align : left;
+	}
+	td:last-child {
+		text-align : right;
+		white-space : nowrap;
+	}
 	.first {
 		width : 400px !important;
 	}
@@ -33,8 +40,18 @@
 </style>
 </head>
 <body>
-	<table><tbody>
-	<tr><td style="text-align:left;vertical-align:middle"><strong><font size="+2"><%= @name %></font></strong></td><td style="text-align:right">
+	<% unless @error.nil? %>
+		<h2 style='color:red'><%= @error %></h2>
+		<ul>
+			<li><%= link_to('Misc variables','/misc_variables') %></li>
+			<li><%= link_to 'Computer skills','/computer_skills' %></li>
+			<li><%= link_to('Educations','/educations') %></li>
+			<li><%= link_to('Experiences','/experiences') %></li>
+			<li><%= link_to('Related courses','/related_courses') %></li>
+			<li><%= link_to('Activities','/activities') %></li>
+		</ul>
+	<% end %><table><tbody>
+	<tr><td style="text-align:left;vertical-align:middle"><strong><font size="+2"><%= @name %></font></strong></td><td>
 	<strong>                                               
 	<% @address.split('|').each do |addressLine| %>
 		<%= addressLine.upcase %><br />
@@ -55,19 +72,23 @@
 	<table><tbody>  
 	<% @experiences.each do |experience| %>
 	  <tr>
-	    <td class="first"><strong><%= experience.role %></strong>
-			<% if experience.details %>                            
+	    <td class="first"><strong><%= experience.role %></strong></td>
+	    <td><%= experience.company %></td>
+	    <td><%= experience.location %></td>
+	    <td><%= experience.dates %></td>
+			<% if experience.details.size>0 %>
+		</tr>
+		<tr>
+			<td colspan="3">
 				<ul>
 				<% experience.details.split("\n").each do |detail| %>
 					<li><%= detail %></li>
 				<% end %>
 				</ul>
+			</td>
+			<td>&nbsp;</td>
 			<% end %>
-		</td>
-	    <td><%= experience.company %></td>
-	    <td><%= experience.location %></td>
-	    <td style="text-align:right"><%= experience.dates %></td>
-	</tr>
+		</tr>
 	<% end %>
 	</tbody></table>
 	<hr>
@@ -76,11 +97,11 @@
 	<% @educations.each do |education| %>   
 		<tr>
 	    <td style="width:90%"><strong><%= education.degree_type %> in <big><%= education.degree_subject %></big>,</strong> <%= education.school %>, <%= education.school_location %></td>
-	    <td style="text-align:right"><%= education.graduation_date %></td>
+	    <td><%= education.graduation_date %></td>
 	<% end %>
 	<tr><td>	
-	<strong>Cumulative GPA: <big><%= @cumulativeGpa %> / <%= @maximumGpa %></big></strong>
-	</td></tr>
+	<strong>Cumulative GPA: <big><%= format("%.2f",@cumulativeGpa.to_f) %> / <%= format("%.2f",@maximumGpa.to_f) %></big></strong>
+	</td><td>&nbsp;</td></tr>
 	</tbody></table>
 	<hr>
 	<center><strong>RELATED COURSES</strong></center>
@@ -96,7 +117,7 @@
 	  <tr>
 	    <td><strong><%= activity.club_name %></strong></td>
 	    <td><%= activity.position %></td>
-	    <td style="text-align:right"><%= activity.dates %></td>
+	    <td><%= activity.dates %></td>
 	</tr>
 	<% end %>
 	</tbody></table>

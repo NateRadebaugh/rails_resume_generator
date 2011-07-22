@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<% if notice %>
+	<%= link_to('Create another related course','/related_courses/new') %>
+<% end %>
 
 <p>
   <b>Course:</b>

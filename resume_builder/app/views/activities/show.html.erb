@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<% if notice %>
+	<%= link_to('Create another activity','/activities/new') %>
+<% end %>
 
 <p>
   <b>Club name:</b>

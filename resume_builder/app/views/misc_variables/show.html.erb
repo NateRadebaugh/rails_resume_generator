@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<% if notice %>
+	<%= link_to('Create another variable','/misc_variables/new') %>
+<% end %>
 <p>
   <b>Variable name:</b>
   <%= @misc_variable.variable_name %>
