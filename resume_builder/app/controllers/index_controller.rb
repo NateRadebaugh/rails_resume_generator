@@ -26,6 +26,8 @@ class IndexController < ApplicationController
          end
     }
     @related_courses = RelatedCourse.all
+    @page_data = render_to_string()                    
+    
+    File.open('../resume.html','w') {|f| f.write(@page_data) }
   end
-
 end
