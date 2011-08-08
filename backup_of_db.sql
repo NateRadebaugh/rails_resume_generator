@@ -8,10 +8,11 @@ INSERT INTO "schema_migrations" VALUES('20110720062808');
 INSERT INTO "schema_migrations" VALUES('20110720062826');
 INSERT INTO "schema_migrations" VALUES('20110720063504');
 CREATE TABLE "experiences" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role" varchar(255), "company" varchar(255), "location" varchar(255), "dates" varchar(255), "details" text, "created_at" datetime, "updated_at" datetime);
-INSERT INTO "experiences" VALUES(1,'Interim Engineering Intern','Qualcomm, Inc.','San Diego, CA','May 2011 - August 2011','TD-SCDMA Team
-Wrote tools to automate tests and increase productivity
-Worked on Call Flow Analysis tools','2011-07-22 07:02:02.038169','2011-07-22 07:02:02.038169');
-INSERT INTO "experiences" VALUES(2,'Senior Computer Consultant','Purdue ResNet Services','West Lafayette, IN','Fall 2010 - Present','Manager','2011-07-22 07:02:14.862937','2011-07-22 07:02:14.862937');
+INSERT INTO "experiences" VALUES(1,'Interim Engineering Intern','Qualcomm, Inc.','San Diego, CA','May 2011 - August 2011','Wrote tools to automate tests, increasing testing productivity over 700%
+Worked on Call Flow Analysis tools
+Wrote scripts to automatically refactor and decouple header files, significantly decreasing compile times','2011-07-22 07:02:02.038169','2011-08-08 21:27:52.060280');
+INSERT INTO "experiences" VALUES(2,'Senior ResNet Computer Consultant','Purdue University','West Lafayette, IN','Fall 2010 - Present','Supervised ResNet Employees
+Active role in the interviewing, hiring, and training of new employees','2011-07-22 07:02:14.862937','2011-08-08 21:29:30.344198');
 INSERT INTO "experiences" VALUES(3,'Software Developer','Purdue ResNet Services','West Lafayette, IN','Spring 2010 - Present','Database Administrator
 Web Developer','2011-07-22 07:02:28.914138','2011-07-22 07:02:28.914138');
 INSERT INTO "experiences" VALUES(4,'Computer Consultant','Purdue ResNet Services','West Lafayette, IN','Fall 2009 - Spring 2010','','2011-07-22 07:02:39.206421','2011-07-22 07:02:39.206421');
