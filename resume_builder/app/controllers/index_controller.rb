@@ -15,13 +15,13 @@ class IndexController < ApplicationController
          when 'address'
            @address = var.variable_value
          when 'phone'
-           @phone = var.variable_value[0..2]+'-'+var.variable_value[3..5]+'-'+var.variable_value[6..9]
+           @phone = var.variable_value #var.variable_value[0..2]+'-'+var.variable_value[3..5]+'-'+var.variable_value[6..9]
          when 'email'
            @email = var.variable_value
          when 'objective'
            @objective = var.variable_value
          when 'important_words_in_objective'
-           @important = var.variable_value
+           @important = var.variable_value.split(',')
          when 'maximumGpa'
            @maximumGpa = var.variable_value
          when 'cumulativeGpa'
