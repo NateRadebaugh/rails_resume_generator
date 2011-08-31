@@ -31,22 +31,15 @@
 		padding : 0;
 	}
 	ul {
-		margin-left : 30px;
+		margin-left : 20px;
 		text-align : left;
 		white-space : normal;
 	}
-	#experience ul {
-		margin-bottom : 1em;
-	}
-	hr {
-		margin : 1em 0 1em 0;
-		border : 1px solid #333;
-	}
-	hr, br {
+	br {
 		clear : both;
 	}
 	.label, .content {
-		margin-top : 20px;
+		margin-top : 10px;
 		float : left;
 	}
 	.label {
@@ -103,14 +96,12 @@
 	<div class="content">
 	<%= highlight(@objective,@important) %>
 	</div>
-	<!--
 	<div class="label">Software Skills:</div>
 	<div class="content">
 	<% @computer_skills.each do |computer_skill| %>
 		<%= computer_skill.skill %>. 
 	<% end %>
 	</div>
-	-->
 	<div class="label">Education:</div>
 	<div class="content">
 	<% @educations.each do |education| %>
@@ -142,14 +133,14 @@
 			<% end %>
 		<% end %>
 	</tbody></table>
-	<strong style="display:inline-block;margin-top : 0.5em">Cumulative GPA: <%= format("%.2f",@cumulativeGpa.to_f) %> / <%= format("%.2f",@maximumGpa.to_f) %></strong>
+	<strong style="display:inline-block;margin-top:0.25em">Cumulative GPA: <%= format("%.2f",@cumulativeGpa.to_f) %> / <%= format("%.2f",@maximumGpa.to_f) %></strong>
 	</div>
 	<div class="label">Work Experience:</div>
 	<div class="content">
 	<% @experiences.each do |experience| %>
-		<div style="padding-bottom : 0.5em"><strong><%= experience.company %></strong>, <%= experience.location %><span style="float:right"><%= experience.dates %></span><br /><span style="font-style: italic"><%= experience.role %></span></div>
+		<div style="padding-bottom : 0.25em"><strong><%= experience.company %></strong>, <%= experience.location %><span style="float:right"><%= experience.dates %></span><br /><span style="font-style: italic"><%= experience.role %></span></div>
 		<% if experience.details.size>0 %>
-		<ul style="padding-bottom : 1em">
+		<ul style="padding-bottom : 0.5em">
 			<% experience.details.split("\n").each do |detail| %>
 				<li><%= detail %></li>
 			<% end %>
