@@ -4,16 +4,16 @@
 <style type="text/css">
 	table, html {
 		font-size : 90%;  
-		font-family : Arial;
+		font-family : "Helvetica Neue", Arial;
 	}
 	table {
 		width : 100%;
 	}
-	table td {
+	*, table td {
 		vertical-align : top;
 	}
 	td {
-		padding : 5 0 0 0;
+		padding : 1 0 0 0;
 		width : 300px;
 	}
 	td:first-child {
@@ -24,7 +24,7 @@
 		white-space : nowrap;
 	}
 	.first {
-		width : 400px !important;
+		width : 500px !important;
 	}
 	p, ul, ul li {
 		margin : 0;
@@ -32,94 +32,144 @@
 	}
 	ul {
 		margin-left : 30px;
+		text-align : left;
+		white-space : normal;
+	}
+	#experience ul {
+		margin-bottom : 1em;
 	}
 	hr {
-		margin : 5px 0 5px 0;
-		border:1px solid #999;
+		margin : 1em 0 1em 0;
+		border : 1px solid #333;
+	}
+	hr, br {
+		clear : both;
+	}
+	.label, .content {
+		margin-top : 20px;
+		float : left;
+	}
+	.label {
+		clear : left;
+		font-weight : bold;
+		width : 1.5in;
+	}
+	.content {
+		width : 6.5in;
+		clear : right;
+	}
+	#name {
+		font-size : 3em;
+		font-weight : bold;
+		display : inline-block;
+	}
+	#contact {
+		display : inline-block;
+		float : right;
+		text-align : right;
+	}
+	#wrapper {
+		width : 8in;
 	}
 </style>
 </head>
 <body>
+<div id="wrapper">
 	<% unless @error.nil? %>
 		<h2 style='color:red'><%= @error %></h2>
 		<ul>
 			<li><%= link_to('Misc variables','/misc_variables') %></li>
-			<li><%= link_to 'Computer skills','/computer_skills' %></li>
+			<li><%= link_to('Computer skills','/computer_skills') %></li>
 			<li><%= link_to('Experiences','/experiences') %></li>
 			<li><%= link_to('Educations','/educations') %></li>
 			<li><%= link_to('Related courses','/related_courses') %></li>
 			<li><%= link_to('Activities','/activities') %></li>
 		</ul>
-	<% end %><table><tbody>
-	<tr><td style="text-align:left;vertical-align:middle"><strong><font size="+2"><%= @name %></font></strong></td><td>
-	<strong>                                               
-	<% @address.split('|').each do |addressLine| %>
-		<%= addressLine.upcase %><br />
+	<% end %>
+<div>
+	<div id="name"><%= @name %></div>
+	<div id="contact">
+	<% @address.split('|').each do |address_line| %>
+		<%= address_line %><br />
 	<% end %>
 	<%= @phone %><br />      
-	<%= @email %><br /></strong></td></tr></tbody></table>
-	<hr>
-	<p><strong>OBJECTIVE</strong></p>
-	<p><%= highlight(@objective,@important) %></p>
-	<center><strong>COMPUTER SKILLS</strong><br></center>
-	<ul style="list-style:none">
+	<%= @email %><br />
+	<%= @website %>
+	</div>
+</div>
+	<br />
+	
+	<div class="label">Objective:</div>
+	<div class="content">
+	<%= highlight(@objective,@important) %>
+	</div>
+	<!--
+	<div class="label">Software Skills:</div>
+	<div class="content">
 	<% @computer_skills.each do |computer_skill| %>
-		<li><%= computer_skill.skill %>.</li>
+		<%= computer_skill.skill %>. 
 	<% end %>
-	</ul>
-	<hr>
-	<center><strong>EXPERIENCE</strong><br></center>
-	<table><tbody>  
-	<% @experiences.each do |experience| %>
-	  <tr>
-	    <td class="first"><strong><%= experience.role %></strong></td>
-	    <td><%= experience.company %></td>
-	    <td><%= experience.location %></td>
-	    <td><%= experience.dates %></td>
-			<% if experience.details.size>0 %>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<ul>
-				<% experience.details.split("\n").each do |detail| %>
-					<li><%= detail %></li>
-				<% end %>
-				</ul>
-			</td>
-			<td>&nbsp;</td>
+	</div>
+	-->
+	<div class="label">Education:</div>
+	<div class="content">
+	<% @educations.each do |education| %>
+		<table><tbody>
+			<% unless education.school == "" and education.school_location == "" and education.graduation_date == "" %>
+			<tr>
+				<td style="width:90%"><strong><%= education.school %></strong>, <%= education.school_location %></td>
+				<td><%= education.graduation_date %></td>
+			</tr>
 			<% end %>
+			<tr>
+				<td colspan="2" style="text-align:left"><%= education.degree_type %>, <i><%= education.degree_subject %></i></td>
+			</tr>
+		</tbody></table>
+	<% end %>
+	</div>
+	<div class="label">Related Courses:</div>
+	<div class="content">
+	<table><tbody>
+		<% @related_courses.each do |related_course| %>
+			<% related_course.course.split("\n").each_index do |index| %>
+				<% if (index.even? == true) %>
+				<tr>
+				<% end %>
+				<td style="text-align:left"><%= related_course.course.split("\n")[index] %></td>
+				<% if (index.odd? == true) %>
+				</tr>
+				<% end %>
+			<% end %>
+		<% end %>
+	</tbody></table>
+	<strong style="display:inline-block;margin-top : 0.5em">Cumulative GPA: <%= format("%.2f",@cumulativeGpa.to_f) %> / <%= format("%.2f",@maximumGpa.to_f) %></strong>
+	</div>
+	<div class="label">Work Experience:</div>
+	<div class="content">
+	<% @experiences.each do |experience| %>
+		<div style="padding-bottom : 0.5em"><strong><%= experience.company %></strong>, <%= experience.location %><span style="float:right"><%= experience.dates %></span><br /><span style="font-style: italic"><%= experience.role %></span></div>
+		<% if experience.details.size>0 %>
+		<ul style="padding-bottom : 1em">
+			<% experience.details.split("\n").each do |detail| %>
+				<li><%= detail %></li>
+			<% end %>
+		</ul>
+		<% end %>
 		</tr>
 	<% end %>
-	</tbody></table>
-	<hr>
-	<center><strong>EDUCATION</strong></center>
-	<table><tbody>
-	<% @educations.each do |education| %>   
-		<tr>
-	    <td style="width:90%"><strong><%= education.degree_type %> in <big><%= education.degree_subject %></big>,</strong> <%= education.school %>, <%= education.school_location %></td>
-	    <td><%= education.graduation_date %></td>
-	<% end %>
-	<tr><td>	
-	<strong>Cumulative GPA: <big><%= format("%.2f",@cumulativeGpa.to_f) %> / <%= format("%.2f",@maximumGpa.to_f) %></big></strong>
-	</td><td>&nbsp;</td></tr>
-	</tbody></table>
-	<hr>
-	<center><strong>RELATED COURSES</strong></center>
-	<ul style="list-style:none">
-		<% @related_courses.each do |related_course| %>
-			<li><%= related_course.course+((related_course==@related_courses.last)? '.' : ',') %></li>
-		<% end %>
-	</ul>
-	<hr>
-	<center><strong>ACTIVITIES</strong></center>
+	</div>
+	<div class="label">Activities:</div>
+	<div class="content">
 	<table><tbody>      
 	<% @activities.each do |activity| %>
 	  <tr>
 	    <td><strong><%= activity.club_name %></strong></td>
-	    <td><%= activity.position %></td>
+	    <td style="text-align : center"><%= activity.position %></td>
 	    <td><%= activity.dates %></td>
 	</tr>
 	<% end %>
 	</tbody></table>
+	</div>
+</div>
 </body>
-</html>                    
+</html>

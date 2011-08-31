@@ -26,6 +26,8 @@ class IndexController < ApplicationController
            @maximumGpa = var.variable_value
          when 'cumulativeGpa'
            @cumulativeGpa = var.variable_value
+         when 'website'
+           @website = var.variable_value
          end
     }
     if @name.nil? || @address.nil? || @phone.nil? || @email.nil? || @objective.nil? || @important.nil? || @cumulativeGpa.nil? || @educations.empty? || @experiences.empty? || @activities.empty? || @computer_skills.empty?
